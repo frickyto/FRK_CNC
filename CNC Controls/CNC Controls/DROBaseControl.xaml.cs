@@ -37,8 +37,12 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 */
 
+using CNC.Core;
+using CNC.GCode;
+using System.Data;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Interop;
 using System.Windows.Media;
 
 namespace CNC.Controls
@@ -92,6 +96,15 @@ namespace CNC.Controls
         {
             get { return txtReadout.Tag; }
             set { txtReadout.Tag = btnZero.Tag = value; }
+        }
+
+        private void btnHome_Click(object sender, RoutedEventArgs e)
+        {
+            string ComandoG;
+                        
+            ComandoG = "G90" + this.Label + "0";
+            (DataContext as GrblViewModel).ExecuteCommand(ComandoG);
+            
         }
 
         private void btnZero_Click(object sender, RoutedEventArgs e)
